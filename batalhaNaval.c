@@ -5,36 +5,88 @@
 // Siga os comentários para implementar cada parte do desafio.
 
 int main() {
-    // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
 
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
+    // Declaração da matriz
+    int Tabuleiro[10][10] = {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
 
-    // Nível Mestre - Habilidades Especiais com Matrizes
-    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
-    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
-    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
+    // As variáveis das coordenadas
+    int VertLinha;
+    int VertColuna;
+    int HorzLinha;
+    int HorzColuna;
+    int Diag1Linha; // A diagonal com formato da barra invertida (\)
+    int Diag1Coluna;
+    int Diag2Linha; // A diagonal com formato de barra (/)
+    int Diag2Coluna;
 
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
+    // Sistema simples para entrada de comando, para compensar não ter realizado o nível Mestre
+    printf("\n=== ENTRADA ===\n");
+    printf("Digite a linha do navio vertical: ");
+    scanf("%d", &VertLinha);
+
+    printf("Digite a coluna do navio vertical: ");
+    scanf("%d", &VertColuna);
+
+    printf("Digite a linha do navio horizontal: ");
+    scanf("%d", &HorzLinha);
+
+    printf("Digite a coluna do navio horizontal: ");
+    scanf("%d", &HorzColuna);
+
+    printf("Digite a coluna do primeiro navio diagonal: ");
+    scanf("%d", &Diag1Linha);
     
-    // Exemplo para habilidade em octaedro:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 0 0 1 0 0
+    printf("Digite a linha do primeiro navio diagonal: ");
+    scanf("%d", &Diag1Coluna);
 
-    // Exemplo para habilidade em cruz:
-    // 0 0 1 0 0
-    // 1 1 1 1 1
-    // 0 0 1 0 0
+    printf("Digite a coluna do segundo navio diagonal: ");
+    scanf("%d", &Diag2Linha);
+    
+    printf("Digite a linha do segundo navio diagonal: ");
+    scanf("%d", &Diag2Coluna);
+
+    // Posicionamento dos navios
+    printf("\n=== COORDENADAS ===\n");
+    for (int i = 0; i < 3; i++) { // Aqui, 3 significa o comprimento do navio
+        Tabuleiro[VertLinha + i][VertColuna] = 3; // Basicamente, ao colocar as coordenadas desejadas, o sistema muda o valor de três posições (partindo da selecionada) para 3, representando a parte de um navio. 
+        printf("Coordenada do Navio Vertical: (%d, %d)\n", VertLinha + i, VertColuna); // "+ i" muda a linha onde está o ponto a alterar
+    }
+
+    for (int i = 0; i < 3; i++) {
+        Tabuleiro[HorzLinha][HorzColuna + i] = 3; // Mesma coisa, mas agora o "+ i" muda a coluna
+        printf("Coordenada do Navio Horizontal: (%d, %d)\n", HorzLinha, HorzColuna + i);
+    }
+    
+    for (int i = 0; i < 3; i++) { 
+        Tabuleiro[Diag1Linha + i][Diag1Coluna + i] = 3; // "+ i" em ambas linha e coluna fazem o navio sair na diagonal
+        printf("Coordenada do primeiro Navio Diagonal: (%d, %d)\n", Diag1Linha + i, Diag1Coluna + i);
+    }
+
+    for (int i = 0; i < 3; i++) { 
+        Tabuleiro[Diag2Linha - i][Diag2Coluna + i] = 3; // "- i" em um dos valores muda a rotação do outro navio diagonal
+        printf("Coordenada do segundo Navio Diagonal: (%d, %d)\n", Diag2Linha - i, Diag2Coluna + i);
+    }
+
+    // Exibição do tabuleiro
+    printf("\n=== TABULEIRO ===\n");
+    for (int i = 0; i < 10; i++) { // 10 é o tamanho do tabuleiro
+        for (int j = 0; j < 10; j++) {
+            printf("%d ", Tabuleiro[i][j]); // Para cada linha, imprima o valor de cada coluna
+        }
+        printf("\n");
+    }
+
 
     return 0;
 }
